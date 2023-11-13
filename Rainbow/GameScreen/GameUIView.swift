@@ -7,36 +7,28 @@
 
 import SwiftUI
 
-struct TagUIViewData {
-    let label: String
-    let background: UIColor
-    let isCheckBoxHidden: Bool
-    let isCheckBoxActive: Bool
-}
-
-
 struct TagUIView: View {
-
-    var model: TagUIViewData
+    @StateObject var model: GameScreenViewModel = GameScreenViewModel()
 
     var body: some View {
         HStack {
-            Text(model.label)
+            Text(model.labelText)
+//                .foregroundStyle(Color(model.elementColor)).opacity(0.9)
+                .font(.title)
         }
-        .frame(width: 200, height: 50)
-        .background(Color(model.background))
-    }
-}
-
-struct GameUIView: View {
-
-    var model: TagUIViewData
-
-    var body: some View {
-        TagUIView(model: model)
+        .frame(width: UIScreen.main.bounds.width * 0.5, height: 40)
+        .background(Color(model.elementColor)).opacity(0.7)
+        .cornerRadius(15.0)
+        .shadow(radius: 10, x: 0, y: 5)
+        .onAppear {
+            model.startTimer()
+        }
+        .onDisappear {
+            model.stopTimer()
+        }
     }
 }
 
 #Preview {
-    GameUIView(model: TagUIViewData(label: "Test", background: .red, isCheckBoxHidden: true, isCheckBoxActive: true))
+    TagUIView()
 }
