@@ -9,12 +9,15 @@ import SwiftUI
 
 class GameEngineViewModel: ObservableObject {
 
+    // MARK: - Model from settings
+    let model = LocalStorageService.shared.loadSettings(settingsName: Keys.settings.rawValue)
+
     @Published var elementColor: Color = .red // Сюда прилетает рандомный цвет
     @Published var viewPosition: CGFloat = CGFloat.random(in: -100...100) // Сюда прилетает рандомная позиция
     @Published var timerInterval: TimeInterval = 5.0 // Начальное время засэтапить с настроек
     private var timer: DispatchSourceTimer?
-
-    let colorSet: [CustomColors] = CustomColors.allCases
+    
+    lazy var colorSet: [CustomColors] = model!.backgroundForText ? CustomColors.allCases : [CustomColors.customGreen]
     var labelText: String {
         "привет"
     }
