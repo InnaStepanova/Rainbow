@@ -47,7 +47,7 @@ struct MainMenuView: View {
                         }
                         
                         HStack {
-                            NavigationLink(destination: Text("SETTINGS VIEW")) {
+                            NavigationLink(destination: SettingsView()) {
                                 CustomIconButtonView(name: "gearshape.fill")
                             }
                             

@@ -12,6 +12,7 @@ struct TagUIView: View {
 
     var body: some View {
         ZStack {
+            model.applicationBackground
             Text(model.labelText)
                 .font(.title)
                 .frame(width: UIScreen.main.bounds.width * 0.5, height: 40)
@@ -42,6 +43,7 @@ struct TagUIView: View {
             .navigationBarBackButtonHidden(true)
             .navigationBarItems(leading: CustomBackButton())
         }
+        .ignoresSafeArea()
     }
 
 }
