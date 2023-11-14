@@ -12,6 +12,8 @@ class GameEngineViewModel: ObservableObject {
     @Published var elementColor: Color = .red
     private var timer: Timer?
 
+    // привет
+
     var time: Double {
         1
     }

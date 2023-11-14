@@ -14,7 +14,11 @@ struct RainbowApp: App {
 
     var body: some Scene {
         WindowGroup {
-            TagUIView()
+            MainMenuView()
         }
     }
+}
+
+#Preview {
+    MainMenuView()
 }
