@@ -21,6 +21,9 @@ class GameEngineViewModel: ObservableObject {
     var time: Double {
         1
     }
+    var applicationBackground: Color {
+        Color.gray
+    }
 
     func startTimer() {
         timer = DispatchSource.makeTimerSource()
