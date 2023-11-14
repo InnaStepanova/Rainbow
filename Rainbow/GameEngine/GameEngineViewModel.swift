@@ -26,8 +26,10 @@ class GameEngineViewModel: ObservableObject {
         timer = DispatchSource.makeTimerSource()
         timer?.schedule(deadline: .now() + timerInterval, repeating: timerInterval)
         timer?.setEventHandler {
-            self.elementColor = self.randomColor(colors: self.colorSet)
-            self.viewPosition = CGFloat.random(in: -100...100)
+            DispatchQueue.main.async {
+                self.elementColor = self.randomColor(colors: self.colorSet)
+                self.viewPosition = CGFloat.random(in: -100...100)
+            }
         }
         timer?.resume()
     }
@@ -41,7 +43,7 @@ class GameEngineViewModel: ObservableObject {
     }
 
     func increaseTimerInterval(withTime: Double) {
-        guard withTime > 0 else { return }
+        guard withTime < 0 else { return }
         timerInterval -= withTime
         print("GEBUGGG: now time is: \(timerInterval)")
         stopTimer()
