@@ -33,7 +33,7 @@ struct RulesMainView: View {
                 VStack {
                     Text("подложка включена:")
                     Text("  синий  ")
-                        .shadow(color: .black, radius: 10, x: 1, y: 1)
+                        .fontWeight(.semibold)
                         .padding(10)
                         .padding(.horizontal, 5)
                         .background(
