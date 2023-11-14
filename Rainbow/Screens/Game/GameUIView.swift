@@ -11,7 +11,7 @@ struct TagUIView: View {
     @EnvironmentObject var model: GameEngineViewModel
 
     var body: some View {
-        VStack {
+        ZStack {
             Text(model.labelText)
                 .font(.title)
                 .frame(width: UIScreen.main.bounds.width * 0.5, height: 40)
@@ -29,17 +29,19 @@ struct TagUIView: View {
                 model.increaseTimerInterval(withTime: 2)
             }) {
                 Text("x2")
-                    .font(.headline)
-                    .padding(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
+                    .font(.system(size: 27))
+                    .padding(EdgeInsets(top: 14, leading: 25, bottom: 14, trailing: 25))
                     .background(Color.blue)
                     .foregroundColor(.white)
-                    .cornerRadius(10)
-                    .shadow(radius: 5)
             }
+            .cornerRadius(50)
+            .shadow(radius: 5)
+            .position(x: UIScreen.main.bounds.width * 0.8, y: UIScreen.main.bounds.height * 0.8)
+
+            .navigationTitle("\(model.timerInterval)")
+            .navigationBarBackButtonHidden(true)
+            .navigationBarItems(leading: CustomBackButton())
         }
-        .navigationTitle("Помощь")
-        .navigationBarBackButtonHidden(true)
-        .navigationBarItems(leading: CustomBackButton())
     }
 
 }

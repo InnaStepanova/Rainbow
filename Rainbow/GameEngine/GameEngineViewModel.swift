@@ -11,7 +11,7 @@ class GameEngineViewModel: ObservableObject {
 
     @Published var elementColor: Color = .red // Сюда прилетает рандомный цвет
     @Published var viewPosition: CGFloat = CGFloat.random(in: -100...100) // Сюда прилетает рандомная позиция
-    private var timerInterval: TimeInterval = 5.0 // Начальное время засэтапить с настроек
+    @Published var timerInterval: TimeInterval = 5.0 // Начальное время засэтапить с настроек
     private var timer: DispatchSourceTimer?
 
     let colorSet: [CustomColors] = CustomColors.allCases
@@ -43,7 +43,6 @@ class GameEngineViewModel: ObservableObject {
     }
 
     func increaseTimerInterval(withTime: Double) {
-        guard withTime < 0 else { return }
         timerInterval -= withTime
         print("GEBUGGG: now time is: \(timerInterval)")
         stopTimer()
