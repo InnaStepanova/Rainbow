@@ -9,35 +9,64 @@ import SwiftUI
 
 class GameEngineViewModel: ObservableObject {
 
-    @Published var elementColor: Color = .red
-    private var timer: Timer?
+    @Published var elementColor: Color = .red // Сюда прилетает рандомный цвет
+    @Published var viewPosition: CGFloat = CGFloat.random(in: -100...100) // Сюда прилетает рандомная позиция
+    @Published var timerInterval: TimeInterval = 5.0 // Начальное время засэтапить с настроек
+    private var timer: DispatchSourceTimer?
 
+    let colorSet: [CustomColors] = CustomColors.allCases
+    var labelText: String {
+        "привет"
+    }
     var time: Double {
         1
     }
 
-    let colorSet: [CustomColors] = CustomColors.allCases
-
-    var labelText: String {
-        "привет"
-    }
-
     func startTimer() {
-        timer = Timer.scheduledTimer(withTimeInterval: time, repeats: true) { _ in
-            self.elementColor = self.randomColor(colors: self.colorSet)
+        timer = DispatchSource.makeTimerSource()
+        timer?.schedule(deadline: .now() + timerInterval, repeating: timerInterval)
+        timer?.setEventHandler {
+            DispatchQueue.main.async {
+                self.elementColor = self.randomColor(colors: self.colorSet)
+                self.viewPosition = CGFloat.random(in: -100...100)
+            }
         }
+        timer?.resume()
     }
 
-    // TODO: реализовать паузу
     func pauseTimer() {
+        timer?.suspend()
     }
 
     func stopTimer() {
-        timer?.invalidate()
-        timer = nil
+        timer?.cancel()
+    }
+
+    func increaseTimerInterval(withTime: Double) {
+        timerInterval -= withTime
+        print("GEBUGGG: now time is: \(timerInterval)")
+        stopTimer()
+        startTimer()
     }
 
     func randomColor(colors: [CustomColors]) -> Color {
         colors.randomElement()?.color ?? .customAlmond
     }
 }
+
+
+
+
+//    func startTimerWith() {
+//
+//
+//        timer = Timer.scheduledTimer(withTimeInterval: time, repeats: true) { time in
+//            self.elementColor = self.randomColor(colors: self.colorSet)
+//            self.viewPosition = CGFloat.random(in: -100...100)
+//            print("DEBUGG: time is - \(time)")
+//        }
+//    }
+
+
+//        timer?.invalidate()
+//        timer = nil
