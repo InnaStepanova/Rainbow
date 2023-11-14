@@ -10,11 +10,12 @@ import SwiftUI
 @main
 struct RainbowApp: App {
 
-    @StateObject var model = GameEngineViewModel()
+    @StateObject private var viewModel = GameEngineViewModel()
 
     var body: some Scene {
         WindowGroup {
             MainMenuView()
+                .environmentObject(viewModel)
         }
     }
 }

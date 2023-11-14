@@ -13,6 +13,8 @@
 		A1985CF42B03C66000EDF26A /* RulesMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1985CF32B03C66000EDF26A /* RulesMainView.swift */; };
 		A1985CF72B03D44100EDF26A /* CustomBackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1985CF62B03D44100EDF26A /* CustomBackButton.swift */; };
 		A1985CF92B03DF4E00EDF26A /* Color+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1985CF82B03DF4E00EDF26A /* Color+Ext.swift */; };
+		A1985CFC2B03FFAA00EDF26A /* LocalStorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1985CFB2B03FFAA00EDF26A /* LocalStorageService.swift */; };
+		A1985CFF2B0401FC00EDF26A /* SettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1985CFE2B0401FC00EDF26A /* SettingsModel.swift */; };
 		FA8F138C2B03F13900851936 /* GameUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8F138A2B03F13900851936 /* GameUIView.swift */; };
 		FA8F138D2B03F13900851936 /* GameEngineViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8F138B2B03F13900851936 /* GameEngineViewModel.swift */; };
 		FAEF6ED82B02DB6E008B8639 /* MainMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAEF6ED72B02DB6E008B8639 /* MainMenuView.swift */; };
@@ -26,6 +28,8 @@
 		A1985CF32B03C66000EDF26A /* RulesMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesMainView.swift; sourceTree = "<group>"; };
 		A1985CF62B03D44100EDF26A /* CustomBackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomBackButton.swift; sourceTree = "<group>"; };
 		A1985CF82B03DF4E00EDF26A /* Color+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Ext.swift"; sourceTree = "<group>"; };
+		A1985CFB2B03FFAA00EDF26A /* LocalStorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalStorageService.swift; sourceTree = "<group>"; };
+		A1985CFE2B0401FC00EDF26A /* SettingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModel.swift; sourceTree = "<group>"; };
 		FA8F138A2B03F13900851936 /* GameUIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameUIView.swift; sourceTree = "<group>"; };
 		FA8F138B2B03F13900851936 /* GameEngineViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameEngineViewModel.swift; sourceTree = "<group>"; };
 		FAEF6ED72B02DB6E008B8639 /* MainMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuView.swift; sourceTree = "<group>"; };
@@ -65,6 +69,8 @@
 				FA8F138F2B03F33D00851936 /* GameEngine */,
 				A1985CEE2B03C0EB00EDF26A /* Screens */,
 				A1985CF52B03D40E00EDF26A /* Components */,
+				A1985CFD2B0401C400EDF26A /* Models */,
+				A1985CFA2B03FF9200EDF26A /* Services */,
 				A1985CF02B03C10400EDF26A /* Extensions */,
 				A1985CF12B03C10E00EDF26A /* Resources */,
 				020840232B0224AC0082C301 /* Preview Content */,
@@ -136,6 +142,22 @@
 				A1985CF62B03D44100EDF26A /* CustomBackButton.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		A1985CFA2B03FF9200EDF26A /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				A1985CFB2B03FFAA00EDF26A /* LocalStorageService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		A1985CFD2B0401C400EDF26A /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				A1985CFE2B0401FC00EDF26A /* SettingsModel.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		FA8F13892B03F10700851936 /* Game */ = {
@@ -224,11 +246,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A1985CFF2B0401FC00EDF26A /* SettingsModel.swift in Sources */,
 				FAEF6ED82B02DB6E008B8639 /* MainMenuView.swift in Sources */,
 				A1985CF72B03D44100EDF26A /* CustomBackButton.swift in Sources */,
 				FA8F138D2B03F13900851936 /* GameEngineViewModel.swift in Sources */,
 				A1985CF42B03C66000EDF26A /* RulesMainView.swift in Sources */,
 				0208401E2B0224AA0082C301 /* RainbowApp.swift in Sources */,
+				A1985CFC2B03FFAA00EDF26A /* LocalStorageService.swift in Sources */,
 				FA8F138C2B03F13900851936 /* GameUIView.swift in Sources */,
 				A1985CF92B03DF4E00EDF26A /* Color+Ext.swift in Sources */,
 			);
