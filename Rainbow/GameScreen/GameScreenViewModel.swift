@@ -9,40 +9,27 @@ import SwiftUI
 
 class GameScreenViewModel: ObservableObject {
 
-    // Передать время из настроек
-    var time: Double {
-       2
-    }
-
+    @Published var elementColor: Color = .red
     private var timer: Timer?
 
-    let colorSet: [UIColor] = [
-        .red,
-        .blue,
-        .green,
-        .orange,
-        .purple,
-        .yellow,
-        .gray,
-        .black,
-        .white,
-    ]
+    var time: Double {
+        1
+    }
 
-    @Published var elementColor: UIColor = .red
+    let colorSet: [CustomColors] = CustomColors.allCases
 
     var labelText: String {
-       "привет"
+        "привет"
     }
 
     func startTimer() {
         timer = Timer.scheduledTimer(withTimeInterval: time, repeats: true) { _ in
-            self.elementColor = self.createRandomLabelColor(colors: self.colorSet)
+            self.elementColor = self.randomColor(colors: self.colorSet)
         }
     }
 
     // TODO: реализовать паузу
     func pauseTimer() {
-
     }
 
     func stopTimer() {
@@ -50,8 +37,7 @@ class GameScreenViewModel: ObservableObject {
         timer = nil
     }
 
-    func createRandomLabelColor(colors: [UIColor]) -> UIColor {
-        colors.randomElement() ?? .black
+    func randomColor(colors: [CustomColors]) -> Color {
+        colors.randomElement()?.color ?? .customAlmond
     }
-
 }

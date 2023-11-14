@@ -17,7 +17,7 @@ struct TagUIView: View {
                 .font(.title)
         }
         .frame(width: UIScreen.main.bounds.width * 0.5, height: 40)
-        .background(Color(model.elementColor)).opacity(0.7)
+        .background(model.elementColor).opacity(0.7)
         .cornerRadius(15.0)
         .shadow(radius: 10, x: 0, y: 5)
         .onAppear {
