@@ -55,7 +55,7 @@ struct MainMenuView: View {
                         
                         Spacer()
                         
-                        NavigationLink(destination: Text("RULES VIEW")) {
+                        NavigationLink(destination: RulesMainView()) {
                             CustomIconButtonView(name: "questionmark")
                         }
                     }
