@@ -10,7 +10,7 @@ import SwiftUI
 @main
 struct RainbowApp: App {
 
-    @StateObject var model = GameScreenViewModel()
+    @StateObject var model = GameEngineViewModel()
 
     var body: some Scene {
         WindowGroup {

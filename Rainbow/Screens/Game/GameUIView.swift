@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TagUIView: View {
-    @StateObject var model: GameScreenViewModel = GameScreenViewModel()
+    @StateObject var model: GameEngineViewModel = GameEngineViewModel()
 
     var body: some View {
         HStack {

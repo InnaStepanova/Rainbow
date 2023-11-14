@@ -1,5 +1,5 @@
 //
-//  GameScreenViewModel.swift
+//  GameEngineViewModel.swift
 //  Rainbow
 //
 //  Created by Alex on 13.11.2023.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-class GameScreenViewModel: ObservableObject {
+class GameEngineViewModel: ObservableObject {
 
     @Published var elementColor: Color = .red
     private var timer: Timer?
