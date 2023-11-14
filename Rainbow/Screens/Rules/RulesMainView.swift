@@ -25,7 +25,7 @@ struct RulesMainView: View {
                     Text("подложка выключена:")
                     Text("синий")
                         .padding(.top)
-                        .foregroundStyle(.customRed)
+                        .foregroundStyle(.red)
                         .font(.title)
                         .shadow(color: .black, radius: 10, x: 1, y: 1)
                 }
@@ -40,7 +40,7 @@ struct RulesMainView: View {
                             Capsule()
                                 .fill(Color.green)
                         )
-                        .foregroundStyle(.customRed)
+                        .foregroundStyle(Color.customPink)
                         .font(.title)
                 }
             }
@@ -50,7 +50,7 @@ struct RulesMainView: View {
                 Text("  Нужно произнести вслух цвет слова (если опция «подложка для букв» выключена) или цвет фона, на котором написано слово (если опция «подложка для букв» включена): говорим «зеленый».")
                     .font(.title2)
                     .padding(.vertical)
-                Text("  В игре можно изменять скорость от 1x до 5x. А так же длительность игры.")
+                Text("  В игре можно изменять скорость от x1 до x5. А так же длительность игры.")
                     .font(.title2)
             }
             .padding(.bottom)

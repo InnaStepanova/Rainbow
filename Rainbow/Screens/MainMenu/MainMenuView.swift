@@ -12,7 +12,7 @@ struct MainMenuView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                Color.mainBackground.ignoresSafeArea()
+                Color.gray.ignoresSafeArea()
                 
                 VStack(spacing: 20) {
                     Spacer()
@@ -34,7 +34,7 @@ struct MainMenuView: View {
                     
                     VStack(spacing: 16) {
                         NavigationLink(destination: Text("NEW GAME VIEW")) {
-                            CustomButtonView(title: "Новая игра", color: .customRed)
+                            CustomButtonView(title: "Новая игра", color: .customPink)
                         }
                         
                         NavigationLink(destination: Text("CONTINUE PLAYING VIEW")) {
@@ -94,7 +94,7 @@ struct CustomIconButtonView: View {
         Image(systemName: name)
             .resizable()
             .frame(width: 45, height: 50)
-            .foregroundStyle(.customPurple)
+            .foregroundStyle(Color.white)
             .shadow(color: .black.opacity(0.3), radius: 4, x: 0, y: 4)
     }
 }
