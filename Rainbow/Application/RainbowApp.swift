@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct RainbowApp: App {
+
+    @StateObject var model = GameEngineViewModel()
+
     var body: some Scene {
         WindowGroup {
-            MainMenuView()
+            TagUIView()
         }
     }
 }
