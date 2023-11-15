@@ -67,7 +67,7 @@ struct SettingsView: View {
             }
         }
         .onDisappear {
-            LocalStorageService.shared.saveSettings(settings: SettingsModel(minutesSlider: minutesSlider, speedOfChangingWords: speedOfChangingWords, backgroundForText: backgroundForText), name: Keys.settings.rawValue)
+            LocalStorageService.shared.saveSettings(settings: SettingsModel(gameDuration: minutesSlider, speedOfChangingWords: speedOfChangingWords, isBackgroundForView: backgroundForText, isChangeTextColor: false), name: Keys.settings.rawValue)
         }
     }
 }

@@ -15,19 +15,23 @@ struct TagUIView: View {
             model.applicationBackground
             Text(model.labelText)
                 .font(.title)
+                .foregroundStyle(model.tagViewTextColor)
                 .frame(width: UIScreen.main.bounds.width * 0.5, height: 40)
-                .background(model.elementColor).opacity(0.7)
+                .background(model.tagViewBackgroundColor).opacity(0.7)
                 .cornerRadius(15.0)
                 .shadow(radius: 10, x: 0, y: 5)
-                .offset(x: model.viewPosition, y: model.viewPosition)
+                .offset(x: model.tagViewXPosition, y: model.tagViewYPosition)
                 .onAppear {
-                    model.startTimer()
+                    model.screenBounds = UIScreen.main.bounds
+                    model.initial()
+                    model.startGameDurationTimer()
+                    model.startGameEngineTimer()
                 }
                 .onDisappear {
                     model.stopTimer()
                 }
             Button(action: {
-                model.increaseTimerInterval(withTime: 2)
+                model.changeTimerInterval()
             }) {
                 Text("x2")
                     .font(.system(size: 27))
@@ -39,13 +43,15 @@ struct TagUIView: View {
             .shadow(radius: 5)
             .position(x: UIScreen.main.bounds.width * 0.8, y: UIScreen.main.bounds.height * 0.8)
 
-            .navigationTitle("\(model.timerInterval)")
+            .navigationTitle("\(model.formattedGameTime)")
             .navigationBarBackButtonHidden(true)
             .navigationBarItems(leading: CustomBackButton())
+            .navigationBarItems(trailing: CustomPauseButton(action: {
+                model.pauseTimer()
+            }))
         }
         .ignoresSafeArea()
     }
-
 }
 
 #Preview {
