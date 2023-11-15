@@ -10,6 +10,9 @@
 		0208401E2B0224AA0082C301 /* RainbowApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0208401D2B0224AA0082C301 /* RainbowApp.swift */; };
 		020840222B0224AC0082C301 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 020840212B0224AC0082C301 /* Assets.xcassets */; };
 		020840252B0224AC0082C301 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 020840242B0224AC0082C301 /* Preview Assets.xcassets */; };
+		0248F6FB2B04133B005D96D9 /* ResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0248F6FA2B04133B005D96D9 /* ResultsView.swift */; };
+		0248F6FD2B041396005D96D9 /* ResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0248F6FC2B041396005D96D9 /* ResultCell.swift */; };
+		0248F6FF2B0413EC005D96D9 /* ResultModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0248F6FE2B0413EC005D96D9 /* ResultModel.swift */; };
 		A1985CF42B03C66000EDF26A /* RulesMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1985CF32B03C66000EDF26A /* RulesMainView.swift */; };
 		A1985CF72B03D44100EDF26A /* CustomBackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1985CF62B03D44100EDF26A /* CustomBackButton.swift */; };
 		A1985CF92B03DF4E00EDF26A /* Color+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1985CF82B03DF4E00EDF26A /* Color+Ext.swift */; };
@@ -25,6 +28,9 @@
 		0208401D2B0224AA0082C301 /* RainbowApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RainbowApp.swift; sourceTree = "<group>"; };
 		020840212B0224AC0082C301 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		020840242B0224AC0082C301 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		0248F6FA2B04133B005D96D9 /* ResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsView.swift; sourceTree = "<group>"; };
+		0248F6FC2B041396005D96D9 /* ResultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultCell.swift; sourceTree = "<group>"; };
+		0248F6FE2B0413EC005D96D9 /* ResultModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultModel.swift; sourceTree = "<group>"; };
 		A1985CF32B03C66000EDF26A /* RulesMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesMainView.swift; sourceTree = "<group>"; };
 		A1985CF62B03D44100EDF26A /* CustomBackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomBackButton.swift; sourceTree = "<group>"; };
 		A1985CF82B03DF4E00EDF26A /* Color+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Ext.swift"; sourceTree = "<group>"; };
@@ -86,6 +92,14 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		0248F6F92B041266005D96D9 /* Results */ = {
+			isa = PBXGroup;
+			children = (
+				0248F6FA2B04133B005D96D9 /* ResultsView.swift */,
+			);
+			path = Results;
+			sourceTree = "<group>";
+		};
 		A1985CED2B03C0C900EDF26A /* Application */ = {
 			isa = PBXGroup;
 			children = (
@@ -97,6 +111,7 @@
 		A1985CEE2B03C0EB00EDF26A /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				0248F6F92B041266005D96D9 /* Results */,
 				FA8F13892B03F10700851936 /* Game */,
 				A1985CEF2B03C0F400EDF26A /* MainMenu */,
 				A1985CF22B03C64000EDF26A /* Rules */,
@@ -140,6 +155,7 @@
 			isa = PBXGroup;
 			children = (
 				A1985CF62B03D44100EDF26A /* CustomBackButton.swift */,
+				0248F6FC2B041396005D96D9 /* ResultCell.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -156,6 +172,7 @@
 			isa = PBXGroup;
 			children = (
 				A1985CFE2B0401FC00EDF26A /* SettingsModel.swift */,
+				0248F6FE2B0413EC005D96D9 /* ResultModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -249,9 +266,12 @@
 				A1985CFF2B0401FC00EDF26A /* SettingsModel.swift in Sources */,
 				FAEF6ED82B02DB6E008B8639 /* MainMenuView.swift in Sources */,
 				A1985CF72B03D44100EDF26A /* CustomBackButton.swift in Sources */,
+				0248F6FB2B04133B005D96D9 /* ResultsView.swift in Sources */,
+				0248F6FD2B041396005D96D9 /* ResultCell.swift in Sources */,
 				FA8F138D2B03F13900851936 /* GameEngineViewModel.swift in Sources */,
 				A1985CF42B03C66000EDF26A /* RulesMainView.swift in Sources */,
 				0208401E2B0224AA0082C301 /* RainbowApp.swift in Sources */,
+				0248F6FF2B0413EC005D96D9 /* ResultModel.swift in Sources */,
 				A1985CFC2B03FFAA00EDF26A /* LocalStorageService.swift in Sources */,
 				FA8F138C2B03F13900851936 /* GameUIView.swift in Sources */,
 				A1985CF92B03DF4E00EDF26A /* Color+Ext.swift in Sources */,
