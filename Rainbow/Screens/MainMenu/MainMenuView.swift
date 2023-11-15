@@ -41,7 +41,9 @@ struct MainMenuView: View {
                                 CustomButtonView(title: "Продолжить", color: .customBlue)
                             }
                             
-                            NavigationLink(destination: Text("STATISTICS VIEW")) {
+                            NavigationLink(destination: StatisticsView(results: [StatisticModel(number: 1, speed: 2, time: 1.0, qtyQwestions: 5, qtyRightAnsver: 3),
+                                                                               StatisticModel(number: 2, speed: 2, time: 1.0, qtyQwestions: 5, qtyRightAnsver: 3),
+                                                                                 StatisticModel(number: 3, speed: 2, time: 1.0, qtyQwestions: 5, qtyRightAnsver: 3)], model: _viewModel)) {
                                 CustomButtonView(title: "Статистика", color: .customGreen)
                             }
                         }

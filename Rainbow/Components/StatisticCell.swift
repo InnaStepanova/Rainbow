@@ -1,5 +1,5 @@
 //
-//  ResultCell.swift
+//  StatisticCell.swift
 //  Rainbow
 //
 //  Created by Лаванда on 14.11.2023.
@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-struct ResultCell: View {
+struct StatisticCell: View {
     
-    var result: ResultModel
+    var result: StatisticModel
     
     var body: some View {
         VStack {
@@ -30,7 +30,7 @@ struct ResultCell: View {
         }
         .font(.system(size: 20))
         .padding()
-        .background()
+        .background(Color.cellBackground)
         .clipShape(RoundedRectangle(cornerRadius: 10))
         .shadow(radius: 4, x: 0, y: 4)
         
@@ -38,5 +38,5 @@ struct ResultCell: View {
 }
 
 #Preview {
-    ResultCell(result: ResultModel(number: 1, speed: 1, time: 1.0, qtyQwestions: 5, qtyRightAnsver: 1))
+    StatisticCell(result: StatisticModel(number: 1, speed: 1, time: 1.0, qtyQwestions: 5, qtyRightAnsver: 1))
 }
