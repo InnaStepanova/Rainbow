@@ -8,5 +8,7 @@
 import Foundation
 
 struct SettingsModel: Codable {
-    
+    let minutesSlider: Double
+    let speedOfChangingWords: Double
+    let backgroundForText: Bool
 }

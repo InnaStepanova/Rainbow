@@ -7,17 +7,21 @@
 
 import Foundation
 
+enum Keys: String {
+    case settings
+}
+
 final class LocalStorageService {
     
     private init() {}
     static let shared = LocalStorageService()
     
     
-    func saveSettings(settings: SettingsModel, name: String) {
+    func saveSettings(settings: SettingsModel, name: Keys.RawValue) {
         save(settings, key: name)
     }
     
-    func loadSettings(settingsName: String) -> SettingsModel? {
+    func loadSettings(settingsName: Keys.RawValue) -> SettingsModel? {
         load(key: settingsName)
     }
     
