@@ -21,9 +21,6 @@ class GameEngineViewModel: ObservableObject {
     var labelText: String {
         "привет"
     }
-    var time: Double {
-        1
-    }
     var applicationBackground: Color {
         Color.gray
     }
@@ -59,20 +56,3 @@ class GameEngineViewModel: ObservableObject {
         colors.randomElement()?.color ?? .customAlmond
     }
 }
-
-
-
-
-//    func startTimerWith() {
-//
-//
-//        timer = Timer.scheduledTimer(withTimeInterval: time, repeats: true) { time in
-//            self.elementColor = self.randomColor(colors: self.colorSet)
-//            self.viewPosition = CGFloat.random(in: -100...100)
-//            print("DEBUGG: time is - \(time)")
-//        }
-//    }
-
-
-//        timer?.invalidate()
-//        timer = nil
