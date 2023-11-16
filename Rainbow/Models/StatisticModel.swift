@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct StatisticModel {
+struct StatisticModel: Codable {
     let number: Int
     let speed: Int
     let time: Double

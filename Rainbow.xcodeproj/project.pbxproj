@@ -23,6 +23,7 @@
 		FA8F138C2B03F13900851936 /* GameUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8F138A2B03F13900851936 /* GameUIView.swift */; };
 		FA8F138D2B03F13900851936 /* GameEngineViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8F138B2B03F13900851936 /* GameEngineViewModel.swift */; };
 		FAEF6ED82B02DB6E008B8639 /* MainMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAEF6ED72B02DB6E008B8639 /* MainMenuView.swift */; };
+		FAF01DB22B0597600096A364 /* CustomButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF01DB12B0597600096A364 /* CustomButtonsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +44,7 @@
 		FA8F138A2B03F13900851936 /* GameUIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameUIView.swift; sourceTree = "<group>"; };
 		FA8F138B2B03F13900851936 /* GameEngineViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameEngineViewModel.swift; sourceTree = "<group>"; };
 		FAEF6ED72B02DB6E008B8639 /* MainMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuView.swift; sourceTree = "<group>"; };
+		FAF01DB12B0597600096A364 /* CustomButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButtonsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,6 +164,7 @@
 			children = (
 				A1985CF62B03D44100EDF26A /* CustomBackButton.swift */,
 				0248F6FC2B041396005D96D9 /* StatisticCell.swift */,
+				FAF01DB12B0597600096A364 /* CustomButtonsView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -289,6 +292,7 @@
 				FA8BC3652B053830003B2068 /* TextForTagView+Ext.swift in Sources */,
 				0248F6FF2B0413EC005D96D9 /* StatisticModel.swift in Sources */,
 				A1985CFC2B03FFAA00EDF26A /* LocalStorageService.swift in Sources */,
+				FAF01DB22B0597600096A364 /* CustomButtonsView.swift in Sources */,
 				FA8F138C2B03F13900851936 /* GameUIView.swift in Sources */,
 				A1985CF92B03DF4E00EDF26A /* Color+Ext.swift in Sources */,
 			);
