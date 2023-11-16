@@ -9,6 +9,7 @@ import Foundation
 
 enum Keys: String {
     case settings
+    case statistics
 }
 
 final class LocalStorageService {
@@ -23,6 +24,19 @@ final class LocalStorageService {
     
     func loadSettings(settingsName: Keys.RawValue) -> SettingsModel? {
         load(key: settingsName)
+    }
+    
+    // MARK: methods for saving / loading game statistics
+    func saveStatistics(_ statistics: [StatisticModel], key: Keys.RawValue) {
+        save(statistics, key: key)
+    }
+    
+    func loadStatistics(key: Keys.RawValue) -> [StatisticModel]? {
+        load(key: key)
+    }
+    
+    func clearStatistics() {
+        UserDefaults.standard.removeObject(forKey: Keys.statistics.rawValue)
     }
     
     // MARK: - private save / load methods

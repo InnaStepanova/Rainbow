@@ -18,6 +18,9 @@ class GameEngineViewModel: ObservableObject {
     @Published var tagViewYPosition: CGFloat = CGFloat.random(in: -100...100)       // Рандомная позиция Y
     @Published var changeViewTimerInterval: TimeInterval = 5.0                      // Ускорение игры по нажатию на кнопку
     @Published var roundDuration: TimeInterval = 300                                // Время раунда
+    
+    // MARK: list of statistical models, with game results.
+    @Published var statistics: [StatisticModel] = []
 
     let applicationBackground: Color = Color.gray
     let colorsForTagBackground: [CustomColors] = CustomColors.allCases
@@ -99,4 +102,21 @@ class GameEngineViewModel: ObservableObject {
         guard let model else { return false }
         return model.isChangeTextColor ? true : false
     }
+    
+    // MARK: - Logic for loading statistics from UserDefaults
+    func loadStatistics() {
+        statistics = LocalStorageService.shared.loadStatistics(key: Keys.statistics.rawValue) ?? []
+    }
+    
+    func updateStatistics(newStatistic: StatisticModel) {
+        statistics.append(newStatistic)
+        LocalStorageService.shared.saveStatistics(statistics, key: Keys.statistics.rawValue)
+    }
+    
+    func clearStatistics() {
+        statistics = []
+        LocalStorageService.shared.clearStatistics()
+    }
+    
+    #warning("реализовать метод создающий и сохраняющий экземпляр структуры статистики, содержащий информацию о том, как прошла игра после завершения каждой игры")
 }
