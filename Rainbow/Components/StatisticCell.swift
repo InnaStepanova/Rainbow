@@ -9,21 +9,21 @@ import SwiftUI
 
 struct StatisticCell: View {
     
-    var result: StatisticModel
+    var statistics: StatisticModel
     
     var body: some View {
         VStack {
             HStack {
-                Text("игра №\(result.number)")
+                Text("игра №\(statistics.number)")
                     .foregroundStyle(Color.customFuxia)
                 Spacer()
-                Text("скорость х\(result.speed)")
+                Text("скорость х\(statistics.speed)")
             }
             .padding(EdgeInsets(top: 0, leading: 0, bottom: 8, trailing: 0))
             HStack {
-                Text("время \(String(format: "%.1f", result.time))")
+                Text("время \(String(format: "%.1f", statistics.time))")
                 Spacer()
-                Text("угадано \(result.qtyRightAnsver)/\(result.qtyQwestions)")
+                Text("угадано \(statistics.qtyRightAnswers)/\(statistics.qtyQuestions)")
                     .fontWeight(.black)
                     .foregroundStyle(Color.customLightGreen)
             }
@@ -38,5 +38,13 @@ struct StatisticCell: View {
 }
 
 #Preview {
-    StatisticCell(result: StatisticModel(number: 1, speed: 1, time: 1.0, qtyQwestions: 5, qtyRightAnsver: 1))
+    StatisticCell(statistics: 
+                    StatisticModel(
+                        number: 1,
+                        speed: 1,
+                        time: 1.0,
+                        qtyQuestions: 5,
+                        qtyRightAnswers: 1
+                    )
+    )
 }

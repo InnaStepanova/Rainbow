@@ -17,7 +17,7 @@ final class LocalStorageService {
     private init() {}
     static let shared = LocalStorageService()
     
-    
+    // MARK: methods for saving / loading game SETTINGS
     func saveSettings(settings: SettingsModel, name: Keys.RawValue) {
         save(settings, key: name)
     }
@@ -26,7 +26,7 @@ final class LocalStorageService {
         load(key: settingsName)
     }
     
-    // MARK: methods for saving / loading game statistics
+    // MARK: methods for saving / loading / deleting game STATISTICS
     func saveStatistics(_ statistics: [StatisticModel], key: Keys.RawValue) {
         save(statistics, key: key)
     }
