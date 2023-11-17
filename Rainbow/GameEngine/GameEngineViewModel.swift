@@ -18,9 +18,14 @@ class GameEngineViewModel: ObservableObject {
     @Published var tagViewYPosition: CGFloat = CGFloat.random(in: -100...100)       // Рандомная позиция Y
     @Published var changeViewTimerInterval: TimeInterval = 5.0                      // Ускорение игры по нажатию на кнопку
     @Published var roundDuration: TimeInterval = 300                                // Время раунда
+
     @AppStorage("minutesSlider")  var gameDuration: Double = 2.0
     @AppStorage("speedOfChangingWords")  var speedOfChangingWords: Double = 5.0
     @AppStorage("backgroundForText")  var backgroundForText: Bool = false
+
+    @Published var shovAlert: Bool = false
+    
+
     // MARK: list of statistical models, with game results.
     @Published var statistics: [StatisticModel] = []
 
@@ -39,8 +44,28 @@ class GameEngineViewModel: ObservableObject {
         let seconds = Int(roundDuration) % 60
         return String(format: "%02d:%02d", minutes, seconds)
     }
+
     var sliderValueChanged: ((TimeInterval) -> Void)?
     var sliderValueChanged2: ((TimeInterval) -> Void)?
+
+    
+    var getRoundStatistic: StatisticModel {
+        let number = statistics.count + 1
+        let speed = changeViewTimerInterval
+        let time = model?.gameDuration ?? 300
+        let numbersOfQuetions = Int(time / changeViewTimerInterval)
+        let numbersOfRightAnswers = numbersOfQuetions
+        
+        return StatisticModel(
+            number: number, 
+            speed: speed,
+            time: time,
+            qtyQuestions: numbersOfQuetions,
+            qtyRightAnswers: numbersOfRightAnswers
+        )
+    }
+
+
     func initial() {
         labelText = textsForLabel.randomElement()?.rawValue ?? ""
         tagViewBackgroundColor = isNeedShowTagBackground() ? randomColorGenerator(colors: colorsForTagBackground) : .clear
@@ -75,9 +100,13 @@ class GameEngineViewModel: ObservableObject {
             roundDuration -= 1.0
             if roundDuration <= 0 {
                 raundTimer?.invalidate()
+
                 sliderValueChanged?(changeViewTimerInterval)
                 sliderValueChanged2?(speedOfChangingWords)
                 
+
+                shovAlert.toggle()
+
             }
         }
     }
@@ -91,6 +120,10 @@ class GameEngineViewModel: ObservableObject {
     func stopTimer() {
         timer?.cancel()
         raundTimer?.invalidate()
+        
+        // call save statistics method
+        let roundStatistics = getRoundStatistic
+        updateStatistics(newStatistic: roundStatistics)
     }
 
     func changeTimerInterval() {
@@ -120,7 +153,7 @@ class GameEngineViewModel: ObservableObject {
     }
     
     func updateStatistics(newStatistic: StatisticModel) {
-        statistics.append(newStatistic)
+//        statistics.append(newStatistic)
         LocalStorageService.shared.saveStatistics(statistics, key: Keys.statistics.rawValue)
     }
     
@@ -128,6 +161,4 @@ class GameEngineViewModel: ObservableObject {
         statistics = []
         LocalStorageService.shared.clearStatistics()
     }
-    
-    #warning("реализовать метод создающий и сохраняющий экземпляр структуры статистики, содержащий информацию о том, как прошла игра после завершения каждой игры")
 }
