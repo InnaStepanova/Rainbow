@@ -12,59 +12,47 @@ struct SettingsView: View {
     @AppStorage("minutesSlider") private var minutesSlider: Double = 2.0
     @AppStorage("speedOfChangingWords") private var speedOfChangingWords: Double = 5.0
     @AppStorage("backgroundForText") private var backgroundForText: Bool = false
+    @EnvironmentObject var model: GameEngineViewModel
 
     var body: some View {
 
-        NavigationView {
             ZStack(alignment: .top) {
-                Color.gray.ignoresSafeArea()
-                ScrollView(.vertical, showsIndicators: false) {
-                    VStack(alignment: .center) {
+                model.applicationBackground.ignoresSafeArea()
+                VStack {
+                    ScrollView(.vertical, showsIndicators: false) {
                         HStack {
                             Text("Время игры мин ")
                                 .lineLimit(1)
                                 .frame(width: 133)
-                            Slider(value: $minutesSlider, in: 0...10, step: 1.0)
+                            Slider(value: $model.gameDuration, in: 1...10, step: 1.0)
                                 .frame(width: 111, height: 31)
                                 .accentColor(Color.orange)
-                            Text("\(Int(minutesSlider))")
+                            Text("\(Int(model.gameDuration))")
                                 .frame(width: 33)
                         }
                         .modifier(CustomStyle())
-
+                        
                         HStack {
                             Text("Скорость смены заданий, сек ")
                                 .frame(width: 133)
-                            Slider(value: $speedOfChangingWords, in: 0...5)
+                            Slider(value: $model.speedOfChangingWords, in: 0...5)
                                 .frame(width: 111, height: 31)
                                 .accentColor(Color.orange)
-                            Text("\(Int(speedOfChangingWords))")
+                            Text("\(Int(model.speedOfChangingWords))")
                                 .frame(width: 33)
                         }
-
+                        
                         .modifier(CustomStyle())
                         HStack{
-                            Toggle("Переключатель", isOn: $backgroundForText).padding(.trailing,8)
+                            Toggle("Подложка для букв ", isOn: $model.backgroundForText).padding(.trailing,8)
                         }
                         .modifier(CustomStyle())
                     }
-
-                }
-                .toolbar {
-                    ToolbarItem(placement: .navigationBarLeading) {
-                        NavigationLink(destination: MainMenuView()  .navigationBarBackButtonHidden(true)) {
-                            Image(systemName: "arrowshape.left.fill")
-                                .foregroundColor(.black)
-                        }
-                    }
-                    ToolbarItem(placement: .principal) {
-                        HStack{
-                            Text("Настройки")
-                                .font(.title)
-                        }
-                    }
-                }
             }
+                .padding()
+                    .navigationTitle("Настройки")
+                    .navigationBarBackButtonHidden(true)
+                    .navigationBarItems(leading: CustomBackButton())
         }
         .onDisappear {
             LocalStorageService.shared.saveSettings(settings: SettingsModel(gameDuration: minutesSlider, speedOfChangingWords: speedOfChangingWords, isBackgroundForView: backgroundForText, isChangeTextColor: false), name: Keys.settings.rawValue)

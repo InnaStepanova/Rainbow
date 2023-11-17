@@ -18,8 +18,14 @@ class GameEngineViewModel: ObservableObject {
     @Published var tagViewYPosition: CGFloat = CGFloat.random(in: -100...100)       // Рандомная позиция Y
     @Published var changeViewTimerInterval: TimeInterval = 5.0                      // Ускорение игры по нажатию на кнопку
     @Published var roundDuration: TimeInterval = 300                                // Время раунда
+
+    @AppStorage("minutesSlider")  var gameDuration: Double = 2.0
+    @AppStorage("speedOfChangingWords")  var speedOfChangingWords: Double = 5.0
+    @AppStorage("backgroundForText")  var backgroundForText: Bool = false
+
     @Published var shovAlert: Bool = false
     
+
     // MARK: list of statistical models, with game results.
     @Published var statistics: [StatisticModel] = []
 
@@ -27,6 +33,7 @@ class GameEngineViewModel: ObservableObject {
     let colorsForTagBackground: [CustomColors] = CustomColors.allCases
     let textsForLabel: [TextForTagView] = TextForTagView.allCases
     var screenBounds: CGRect = CGRect(x: 0, y: 0, width: 100, height: 100)
+    var changeImagePause: Bool = false
     private var timer: DispatchSourceTimer?
     private var raundTimer: Timer?
     private var timerToggle: Bool = false
@@ -37,6 +44,10 @@ class GameEngineViewModel: ObservableObject {
         let seconds = Int(roundDuration) % 60
         return String(format: "%02d:%02d", minutes, seconds)
     }
+
+    var sliderValueChanged: ((TimeInterval) -> Void)?
+    var sliderValueChanged2: ((TimeInterval) -> Void)?
+
     
     var getRoundStatistic: StatisticModel {
         let number = statistics.count + 1
@@ -54,11 +65,16 @@ class GameEngineViewModel: ObservableObject {
         )
     }
 
+
     func initial() {
         labelText = textsForLabel.randomElement()?.rawValue ?? ""
         tagViewBackgroundColor = isNeedShowTagBackground() ? randomColorGenerator(colors: colorsForTagBackground) : .clear
         tagViewTextColor = isNeedChangeTextColor() ? randomColorGenerator(colors: colorsForTagBackground) : .white
-        roundDuration = model?.gameDuration ?? 300
+        roundDuration = gameDuration * 60
+        sliderValueChanged?(roundDuration)
+        changeViewTimerInterval = speedOfChangingWords
+        sliderValueChanged2?(speedOfChangingWords)
+        //roundDuration = model?.gameDuration ?? 300
     }
 
     func startGameEngineTimer() {
@@ -84,7 +100,13 @@ class GameEngineViewModel: ObservableObject {
             roundDuration -= 1.0
             if roundDuration <= 0 {
                 raundTimer?.invalidate()
+
+                sliderValueChanged?(changeViewTimerInterval)
+                sliderValueChanged2?(speedOfChangingWords)
+                
+
                 shovAlert.toggle()
+
             }
         }
     }
