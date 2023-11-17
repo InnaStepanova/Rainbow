@@ -15,11 +15,13 @@ struct TagUIView: View {
             model.applicationBackground
             Text(model.labelText)
                 .font(.title)
-                .foregroundStyle(model.tagViewTextColor)
-                .frame(width: UIScreen.main.bounds.width * 0.5, height: 40)
-                .background(model.tagViewBackgroundColor).opacity(0.7)
-                .cornerRadius(15.0)
-                .shadow(radius: 10, x: 0, y: 5)
+                .foregroundColor(model.backgroundForText ? model.tagViewTextColor : model.tagViewBackgroundColor) .opacity(0.7)
+                                .opacity(0.7)
+                                .frame(width: UIScreen.main.bounds.width * 0.5, height: 40)
+                                .background(model.backgroundForText ? model.tagViewBackgroundColor : Color.clear)
+                                .opacity(0.7)
+                                .cornerRadius(15.0)
+                                .shadow(radius: 10, x: 0, y: 5)
                 .offset(x: model.tagViewXPosition, y: model.tagViewYPosition)
                 .onAppear {
                     model.screenBounds = UIScreen.main.bounds

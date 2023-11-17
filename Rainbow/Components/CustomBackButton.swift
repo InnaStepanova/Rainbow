@@ -26,12 +26,13 @@ struct CustomBackButton: View {
 struct CustomPauseButton: View {
 
     let action: ()->()
-
+    @State var changeImagePause: Bool = false
     var body: some View {
         Button(action: {
+            changeImagePause.toggle()
             action()
         }) {
-            Image(systemName: "pause.fill")
+            Image(systemName: changeImagePause ? "play.fill" : "pause.fill")
                 .imageScale(.medium)
                 .font(.title)
                 .foregroundColor(.black)
