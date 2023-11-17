@@ -8,17 +8,21 @@
 import SwiftUI
 
 enum CustomColors: String, CaseIterable {
+    case cellBackground
     case customAlmond
     case customBlue
     case customBrown
+    case customFuxia
     case customGray
     case customGreen
     case customLavender
     case customLemon
+    case customLightGreen
     case customOrange
     case customPeach
     case customPink
     case customPurple
+    case customRed
     case customYellow
 
     var color: Color {
@@ -37,6 +41,8 @@ enum CustomColors: String, CaseIterable {
             return Color("customLavender")
         case .customLemon:
             return Color("customLemon")
+        case .customLightGreen:
+            return Color("customLightGreen")
         case .customOrange:
             return Color("customOrange")
         case .customPeach:
@@ -45,8 +51,14 @@ enum CustomColors: String, CaseIterable {
             return Color("customPink")
         case .customPurple:
             return Color("customPurple")
+        case .customRed:
+            return Color("customRed")
         case .customYellow:
             return Color("customYellow")
+        case .customFuxia:
+            return Color("customFuxia")
+        case .cellBackground:
+            return Color("cellBackground")
         }
     }
 }
@@ -80,6 +92,10 @@ extension Color {
         return Color("customLemon")
     }
     
+    static var customLightGreen: Color {
+        return Color("customLightGreen")
+    }
+    
     static var customOrange: Color {
         return Color("customOrange")
     }
@@ -98,5 +114,17 @@ extension Color {
     
     static var customYellow: Color {
         return Color("customYellow")
+    }
+    
+    static var customRed: Color {
+        return Color("customRed")
+    }
+    
+    static var customFuxia: Color {
+        return Color("customFuxia")
+    }
+    
+    static var cellBackground: Color {
+        return Color("cellBackground")
     }
 }

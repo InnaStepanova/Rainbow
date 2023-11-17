@@ -7,18 +7,36 @@
 
 import Foundation
 
+enum Keys: String {
+    case settings
+    case statistics
+}
+
 final class LocalStorageService {
     
     private init() {}
     static let shared = LocalStorageService()
     
     
-    func saveSettings(settings: SettingsModel, name: String) {
+    func saveSettings(settings: SettingsModel, name: Keys.RawValue) {
         save(settings, key: name)
     }
     
-    func loadSettings(settingsName: String) -> SettingsModel? {
+    func loadSettings(settingsName: Keys.RawValue) -> SettingsModel? {
         load(key: settingsName)
+    }
+    
+    // MARK: methods for saving / loading game statistics
+    func saveStatistics(_ statistics: [StatisticModel], key: Keys.RawValue) {
+        save(statistics, key: key)
+    }
+    
+    func loadStatistics(key: Keys.RawValue) -> [StatisticModel]? {
+        load(key: key)
+    }
+    
+    func clearStatistics() {
+        UserDefaults.standard.removeObject(forKey: Keys.statistics.rawValue)
     }
     
     // MARK: - private save / load methods

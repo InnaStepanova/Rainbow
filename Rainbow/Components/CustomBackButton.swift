@@ -23,6 +23,22 @@ struct CustomBackButton: View {
     }
 }
 
+struct CustomPauseButton: View {
+
+    let action: ()->()
+
+    var body: some View {
+        Button(action: {
+            action()
+        }) {
+            Image(systemName: "pause.fill")
+                .imageScale(.medium)
+                .font(.title)
+                .foregroundColor(.black)
+        }
+    }
+}
+
 #Preview {
     CustomBackButton()
 }

@@ -8,13 +8,13 @@
 
 import SwiftUI
 
-struct Settings: View {
+struct SettingsView: View {
     @AppStorage("minutesSlider") private var minutesSlider: Double = 2.0
     @AppStorage("speedOfChangingWords") private var speedOfChangingWords: Double = 5.0
     @AppStorage("backgroundForText") private var backgroundForText: Bool = false
-    
+
     var body: some View {
-        
+
         NavigationView {
             ZStack(alignment: .top) {
                 Color.gray.ignoresSafeArea()
@@ -31,7 +31,7 @@ struct Settings: View {
                                 .frame(width: 33)
                         }
                         .modifier(CustomStyle())
-                        
+
                         HStack {
                             Text("Скорость смены заданий, сек ")
                                 .frame(width: 133)
@@ -41,33 +41,36 @@ struct Settings: View {
                             Text("\(Int(speedOfChangingWords))")
                                 .frame(width: 33)
                         }
-                        
+
                         .modifier(CustomStyle())
                         HStack{
                             Toggle("Переключатель", isOn: $backgroundForText).padding(.trailing,8)
                         }
                         .modifier(CustomStyle())
                     }
-                   
+
                 }
                 .toolbar {
-                                  ToolbarItem(placement: .navigationBarLeading) {
-                                      NavigationLink(destination: MainMenuView()  .navigationBarBackButtonHidden(true)) {
-                                          Image(systemName: "arrowshape.left.fill")
-                                              .foregroundColor(.black)
-                                      }
-                                  }
-                                  ToolbarItem(placement: .principal) {
-                                      HStack{
-                                          Text("Настройки")
-                                              .font(.title)
-                                      }
-                                  }
-                              }
-                          }
-                      }
-                  }
-              }
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        NavigationLink(destination: MainMenuView()  .navigationBarBackButtonHidden(true)) {
+                            Image(systemName: "arrowshape.left.fill")
+                                .foregroundColor(.black)
+                        }
+                    }
+                    ToolbarItem(placement: .principal) {
+                        HStack{
+                            Text("Настройки")
+                                .font(.title)
+                        }
+                    }
+                }
+            }
+        }
+        .onDisappear {
+            LocalStorageService.shared.saveSettings(settings: SettingsModel(gameDuration: minutesSlider, speedOfChangingWords: speedOfChangingWords, isBackgroundForView: backgroundForText, isChangeTextColor: false), name: Keys.settings.rawValue)
+        }
+    }
+}
 // MARK: - CustomStyle
 struct CustomStyle: ViewModifier {
     func body(content: Content) -> some View {
@@ -82,6 +85,6 @@ struct CustomStyle: ViewModifier {
 
 struct Settings_Previews: PreviewProvider {
     static var previews: some View {
-        Settings()
+        SettingsView()
     }
 }

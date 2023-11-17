@@ -19,3 +19,7 @@ struct RainbowApp: App {
         }
     }
 }
+
+#Preview {
+    MainMenuView()
+}
