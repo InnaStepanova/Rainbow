@@ -9,6 +9,8 @@ import SwiftUI
 
 struct TagUIView: View {
     @EnvironmentObject var model: GameEngineViewModel
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+
 
     var body: some View {
         ZStack {
@@ -49,6 +51,23 @@ struct TagUIView: View {
             .navigationBarItems(trailing: CustomPauseButton(action: {
                 model.pauseTimer()
             }))
+            .alert(isPresented: $model.shovAlert) {
+                model.stopTimer()
+                return Alert(
+                    title: Text("Поздравляем!"),
+                    message: Text("Игра окончена"),
+                    primaryButton: .default(Text("На главную страницу"), action: {
+                        self.presentationMode.wrappedValue.dismiss()
+                    }),
+                    secondaryButton: .default(Text("Новая игра"), action: {
+                        // Действие при нажатии на "Новая игра"
+                        model.initial()
+                        model.startGameDurationTimer()
+                        model.startGameEngineTimer()
+                        
+                    }))
+            }
+
         }
         .ignoresSafeArea()
     }

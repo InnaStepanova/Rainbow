@@ -18,6 +18,7 @@ class GameEngineViewModel: ObservableObject {
     @Published var tagViewYPosition: CGFloat = CGFloat.random(in: -100...100)       // Рандомная позиция Y
     @Published var changeViewTimerInterval: TimeInterval = 5.0                      // Ускорение игры по нажатию на кнопку
     @Published var roundDuration: TimeInterval = 300                                // Время раунда
+    @Published var shovAlert: Bool = false
     
     // MARK: list of statistical models, with game results.
     @Published var statistics: [StatisticModel] = []
@@ -67,6 +68,7 @@ class GameEngineViewModel: ObservableObject {
             roundDuration -= 1.0
             if roundDuration <= 0 {
                 raundTimer?.invalidate()
+                shovAlert.toggle()
             }
         }
     }
