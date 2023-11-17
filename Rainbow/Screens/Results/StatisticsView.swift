@@ -24,8 +24,8 @@ struct StatisticsView: View {
                                 .font(.title3)
                                 .foregroundStyle(.white)
                         } else {
-                            ForEach(model.statistics, id: \.number ) { stat in
-                                StatisticCell(result: stat)
+                            ForEach(model.statistics, id: \.number ) { statistic in
+                                StatisticCell(statistics: statistic)
                             }
                         }
                     }
@@ -43,6 +43,9 @@ struct StatisticsView: View {
             .navigationTitle("Статистика")
             .navigationBarBackButtonHidden(true)
             .navigationBarItems(leading: CustomBackButton())
+        }
+        .onAppear {
+            model.loadStatistics()
         }
     }
 }
