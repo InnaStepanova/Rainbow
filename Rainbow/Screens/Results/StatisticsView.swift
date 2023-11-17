@@ -22,7 +22,7 @@ struct StatisticsView: View {
                         if model.statistics.isEmpty {
                             Text("Здесь будет ваша статистика по играм")
                                 .font(.title3)
-                                .foregroundStyle(.white)
+                                .foregroundStyle(Color.customLavender)
                         } else {
                             ForEach(model.statistics, id: \.number ) { statistic in
                                 StatisticCell(statistics: statistic)
@@ -34,7 +34,9 @@ struct StatisticsView: View {
                 Spacer()
                 
                 Button {
-                    model.clearStatistics()
+                    withAnimation {
+                        model.clearStatistics()
+                    }
                 } label: {
                     CustomButtonView(title: "Очистить статистику", color: .customRed)
                 }

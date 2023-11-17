@@ -24,12 +24,13 @@ struct CustomButtonView: View {
 
 struct CustomIconButtonView: View {
     let name: String
+    let color: Color
     
     var body: some View {
         Image(systemName: name)
             .resizable()
             .frame(width: 45, height: 50)
-            .foregroundStyle(Color.white)
+            .foregroundStyle(color)
             .shadow(color: .black.opacity(0.3), radius: 4, x: 0, y: 4)
     }
 }

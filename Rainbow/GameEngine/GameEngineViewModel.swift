@@ -29,7 +29,7 @@ class GameEngineViewModel: ObservableObject {
     // MARK: list of statistical models, with game results.
     @Published var statistics: [StatisticModel] = []
 
-    let applicationBackground: Color = Color.gray
+    let applicationBackground: Color = Color.mainBackground
     let colorsForTagBackground: [CustomColors] = CustomColors.allCases
     let textsForLabel: [TextForTagView] = TextForTagView.allCases
     var screenBounds: CGRect = CGRect(x: 0, y: 0, width: 100, height: 100)
