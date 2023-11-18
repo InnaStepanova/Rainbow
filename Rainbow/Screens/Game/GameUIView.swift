@@ -24,11 +24,8 @@ struct TagUIView: View {
             Text(model.labelText)
                 .font(.title)
                 .foregroundColor(model.backgroundForText ? model.tagViewTextColor : model.tagViewBackgroundColor) 
-//                .opacity(0.7)
-//                                .opacity(0.7)
                                 .frame(width: UIScreen.main.bounds.width * 0.5, height: 40)
                                 .background(model.backgroundForText ? model.tagViewBackgroundColor : Color.clear)
-//                                .opacity(0.7)
                                 .cornerRadius(15.0)
                                 .shadow(radius: 10, x: 0, y: 5)
                 .offset(x: model.tagViewXPosition, y: model.tagViewYPosition)
@@ -45,13 +42,12 @@ struct TagUIView: View {
                     }
                 }
                 .onDisappear {
-                    model.stopTimer()
-                    model.saveCurrentGame()
+                    model.endGame(isAlert: false)
                 }
             Button(action: {
-                model.changeTimerInterval()
+                model.speedButtonTapped()
             }) {
-                Text("x2")
+                Text(model.speedButtonText)
                     .font(.system(size: 27))
                     .padding(EdgeInsets(top: 14, leading: 25, bottom: 14, trailing: 25))
                     .background(Color.blue)
@@ -59,7 +55,7 @@ struct TagUIView: View {
             }
             .cornerRadius(50)
             .shadow(radius: 5)
-            .position(x: UIScreen.main.bounds.width * 0.8, y: UIScreen.main.bounds.height * 0.8)
+            .position(x: UIScreen.main.bounds.width * 0.8, y: UIScreen.main.bounds.height * 0.9)
 
             .navigationTitle("\(model.formattedGameTime)")
             .navigationBarBackButtonHidden(true)
@@ -68,7 +64,7 @@ struct TagUIView: View {
                 model.pauseTimer()
             }))
             .alert(isPresented: $model.shovAlert) {
-                model.stopTimer()
+                model.endGame(isAlert: true)
                 return Alert(
                     title: Text("Поздравляем!"),
                     message: Text("Игра окончена"),
