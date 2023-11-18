@@ -33,11 +33,11 @@ struct MainMenuView: View {
                         Spacer()
                         
                         VStack(spacing: 16) {
-                            NavigationLink(destination: TagUIView()) {
+                            NavigationLink(destination: TagUIView(statusGame: .newGame)) {
                                 CustomButtonView(title: "Новая игра", color: .customPink)
                             }
                             
-                            NavigationLink(destination: Text("CONTINUE PLAYING VIEW")) {
+                            NavigationLink(destination: TagUIView(statusGame: .currentGame)) {
                                 CustomButtonView(title: "Продолжить", color: .customBlue)
                             }
                             
