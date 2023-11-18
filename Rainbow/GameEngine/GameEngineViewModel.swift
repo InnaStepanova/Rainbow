@@ -24,14 +24,13 @@ class GameEngineViewModel: ObservableObject {
     @AppStorage("backgroundForText")  var backgroundForText: Bool = false
 
     @Published var shovAlert: Bool = false
-    @Published var isShowTagBackground = false
     
 
     // MARK: list of statistical models, with game results.
     @Published var statistics: [StatisticModel] = []
 
     let applicationBackground: Color = Color.mainBackground
-    let colorsForTagBackground: [CustomColors] = CustomColors.allCases
+    let colorsForTagBackground: [CustomColors] = [CustomColors.customYellow, CustomColors.customLightGreen, CustomColors.customGreen, CustomColors.customFuxia, CustomColors.customBlue, CustomColors.customBrown, CustomColors.customGray, CustomColors.customPurple, CustomColors.customOrange, CustomColors.customRed]
     let textsForLabel: [TextForTagView] = TextForTagView.allCases
     var screenBounds: CGRect = CGRect(x: 0, y: 0, width: 100, height: 100)
     var changeImagePause: Bool = false
@@ -73,6 +72,9 @@ class GameEngineViewModel: ObservableObject {
         labelText = textsForLabel.randomElement()?.rawValue ?? ""
         tagViewBackgroundColor = isNeedShowTagBackground() ? randomColorGenerator(colors: colorsForTagBackground) : .clear
         tagViewTextColor = isNeedChangeTextColor() ? randomColorGenerator(colors: colorsForTagBackground) : .white
+        while labelText == Color.colorInString(color: tagViewBackgroundColor!) {
+            labelText = textsForLabel.randomElement()?.rawValue ?? ""
+        }
         roundDuration = gameDuration * 60
         sliderValueChanged?(roundDuration)
         changeViewTimerInterval = speedOfChangingWords
@@ -85,6 +87,9 @@ class GameEngineViewModel: ObservableObject {
             labelText = textsForLabel.randomElement()?.rawValue ?? ""
             tagViewBackgroundColor = currentGame.isBackgroundForView ? randomColorGenerator(colors: colorsForTagBackground) : .clear
             tagViewTextColor = isNeedChangeTextColor() ? randomColorGenerator(colors: colorsForTagBackground) : .white
+            while labelText == Color.colorInString(color: tagViewBackgroundColor!) {
+                labelText = textsForLabel.randomElement()?.rawValue ?? ""
+            }
             roundDuration = currentGame.currentGameTime
             sliderValueChanged?(currentGame.currentGameTime)
             changeViewTimerInterval = currentGame.speed
@@ -102,8 +107,6 @@ class GameEngineViewModel: ObservableObject {
             currentGameTime: roundDuration,
             isBackgroundForView: model?.isBackgroundForView ?? false)
         
-        print("CURRENT GAME: \(currentGame)")
-        
         LocalStorageService.shared.saveCurrentGame(currentGame, key: Keys.currentGame.rawValue)
     }
     
@@ -114,6 +117,9 @@ class GameEngineViewModel: ObservableObject {
             DispatchQueue.main.async {
                 self.labelText = self.textsForLabel.randomElement()?.rawValue ?? ""
                 self.tagViewBackgroundColor = self.isNeedShowTagBackground() ? self.randomColorGenerator(colors: self.colorsForTagBackground) : .clear
+                while self.labelText == Color.colorInString(color: self.tagViewBackgroundColor!) {
+                    self.labelText = self.textsForLabel.randomElement()?.rawValue ?? ""
+                }
                 self.tagViewXPosition = CGFloat.random(in: -self.screenBounds.width/4 ... self.screenBounds.width/4)
                 self.tagViewYPosition = CGFloat.random(in: -self.screenBounds.height/3 ... self.screenBounds.height/3)
             }

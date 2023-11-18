@@ -9,9 +9,9 @@
 import SwiftUI
 
 struct SettingsView: View {
-    @AppStorage("minutesSlider") private var minutesSlider: Double = 2.0
-    @AppStorage("speedOfChangingWords") private var speedOfChangingWords: Double = 5.0
-    @AppStorage("backgroundForText") private var backgroundForText: Bool = false
+//    @AppStorage("minutesSlider") private var minutesSlider: Double = 2.0
+//    @AppStorage("speedOfChangingWords") private var speedOfChangingWords: Double = 5.0
+//    @AppStorage("backgroundForText") private var backgroundForText: Bool = false
     @EnvironmentObject var model: GameEngineViewModel
 
     var body: some View {
@@ -54,9 +54,9 @@ struct SettingsView: View {
                     .navigationBarBackButtonHidden(true)
                     .navigationBarItems(leading: CustomBackButton())
         }
-        .onDisappear {
-            LocalStorageService.shared.saveSettings(settings: SettingsModel(gameDuration: minutesSlider, speedOfChangingWords: speedOfChangingWords, isBackgroundForView: backgroundForText, isChangeTextColor: false), name: Keys.settings.rawValue)
-        }
+//        .onDisappear {
+//            LocalStorageService.shared.saveSettings(settings: SettingsModel(gameDuration: minutesSlider, speedOfChangingWords: speedOfChangingWords, isBackgroundForView: backgroundForText, isChangeTextColor: false), name: Keys.settings.rawValue)
+//        }
     }
 }
 // MARK: - CustomStyle

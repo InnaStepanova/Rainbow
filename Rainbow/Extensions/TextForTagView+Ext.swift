@@ -13,6 +13,9 @@ enum TextForTagView: String, CaseIterable {
     case yellow = "Желтый"
     case green = "Зеленый"
     case blue = "Синий"
-    case indigo = "Индиго"
+    case lightGreen = "Салатовый"
     case violet = "Фиолетовый"
+    case gray = "Серый"
+    case brown = "Коричневый"
+    case pinc = "Розовый"
 }

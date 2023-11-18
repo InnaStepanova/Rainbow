@@ -26,6 +26,7 @@ enum CustomColors: String, CaseIterable {
     case customYellow
     case mainBackground
 
+
     var color: Color {
         switch self {
         case .customAlmond:
@@ -62,6 +63,32 @@ enum CustomColors: String, CaseIterable {
             return Color("cellBackground")
         case .mainBackground:
             return Color("mainBackground")
+        }
+    }
+    
+    static func colorInString(color: Color) -> String {
+        switch color {
+        case .customBlue:
+            return "Синий"
+        case .customBrown:
+            return "Коричневый"
+        case .customGray:
+            return "Серый"
+        case .customGreen:
+            return "Зеленый"
+        case .customLightGreen:
+            return "Салатовый"
+        case .customOrange:
+            return "Оранжевый"
+        case .customPurple:
+            return "Фиолетовый"
+        case .customRed:
+            return "Красный"
+        case .customYellow:
+            return "Желтый"
+        case .customFuxia:
+            return "Розовый"
+        default: return ""
         }
     }
 }
@@ -133,5 +160,31 @@ extension Color {
     
     static var mainBackground: Color {
         return Color("mainBackground")
+    }
+    
+    static func colorInString(color: Color) -> String {
+        switch color {
+        case .customBlue:
+            return "Синий"
+        case .customBrown:
+            return "Коричневый"
+        case .customGray:
+            return "Серый"
+        case .customGreen:
+            return "Зеленый"
+        case .customLightGreen:
+            return "Салатовый"
+        case .customOrange:
+            return "Оранжевый"
+        case .customPurple:
+            return "Фиолетовый"
+        case .customRed:
+            return "Красный"
+        case .customYellow:
+            return "Желтый"
+        case .customFuxia:
+            return "Розовый"
+        default: return ""
+        }
     }
 }
