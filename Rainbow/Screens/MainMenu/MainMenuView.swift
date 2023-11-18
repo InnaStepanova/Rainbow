@@ -8,13 +8,13 @@
 import SwiftUI
 
 struct MainMenuView: View {
-    @EnvironmentObject var viewModel: GameEngineViewModel
+    @EnvironmentObject var model: GameEngineViewModel
     
     var body: some View {
         NavigationView {
             GeometryReader { geometry in
                 ZStack {
-                    Color.gray.ignoresSafeArea()
+                    model.applicationBackground.ignoresSafeArea()
                     
                     VStack(spacing: 20) {
                         Image(.rainbow)
@@ -48,13 +48,19 @@ struct MainMenuView: View {
                         
                         HStack {
                             NavigationLink(destination: SettingsView()) {
-                                CustomIconButtonView(name: "gearshape.fill")
+                                CustomIconButtonView(
+                                    name: "gearshape.fill",
+                                    color: .customPurple
+                                )
                             }
                             
                             Spacer()
                             
                             NavigationLink(destination: RulesMainView()) {
-                                CustomIconButtonView(name: "questionmark")
+                                CustomIconButtonView(
+                                    name: "questionmark",
+                                    color: .customFuxia
+                                )
                             }
                         }
                         .padding()
@@ -69,4 +75,5 @@ struct MainMenuView: View {
 
 #Preview {
     MainMenuView()
+        .environmentObject(GameEngineViewModel())
 }

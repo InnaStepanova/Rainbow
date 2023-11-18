@@ -24,6 +24,7 @@ enum CustomColors: String, CaseIterable {
     case customPurple
     case customRed
     case customYellow
+    case mainBackground
 
     var color: Color {
         switch self {
@@ -59,6 +60,8 @@ enum CustomColors: String, CaseIterable {
             return Color("customFuxia")
         case .cellBackground:
             return Color("cellBackground")
+        case .mainBackground:
+            return Color("mainBackground")
         }
     }
 }
@@ -126,5 +129,9 @@ extension Color {
     
     static var cellBackground: Color {
         return Color("cellBackground")
+    }
+    
+    static var mainBackground: Color {
+        return Color("mainBackground")
     }
 }

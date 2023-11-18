@@ -29,7 +29,7 @@ class GameEngineViewModel: ObservableObject {
     // MARK: list of statistical models, with game results.
     @Published var statistics: [StatisticModel] = []
 
-    let applicationBackground: Color = Color.gray
+    let applicationBackground: Color = Color.mainBackground
     let colorsForTagBackground: [CustomColors] = CustomColors.allCases
     let textsForLabel: [TextForTagView] = TextForTagView.allCases
     var screenBounds: CGRect = CGRect(x: 0, y: 0, width: 100, height: 100)
@@ -48,12 +48,13 @@ class GameEngineViewModel: ObservableObject {
     var sliderValueChanged: ((TimeInterval) -> Void)?
     var sliderValueChanged2: ((TimeInterval) -> Void)?
 
-    
+    // генерим и получаем статистические данные раунда игры
+    // изменить формат свойств скорости времени и кол-ва игр
     var getRoundStatistic: StatisticModel {
         let number = statistics.count + 1
-        let speed = changeViewTimerInterval
-        let time = model?.gameDuration ?? 300
-        let numbersOfQuetions = Int(time / changeViewTimerInterval)
+        let speed = speedOfChangingWords
+        let time = gameDuration
+        let numbersOfQuetions = Int(time / speed)
         let numbersOfRightAnswers = numbersOfQuetions
         
         return StatisticModel(
@@ -120,10 +121,6 @@ class GameEngineViewModel: ObservableObject {
     func stopTimer() {
         timer?.cancel()
         raundTimer?.invalidate()
-        
-        // call save statistics method
-        let roundStatistics = getRoundStatistic
-        updateStatistics(newStatistic: roundStatistics)
     }
 
     func changeTimerInterval() {
@@ -152,9 +149,13 @@ class GameEngineViewModel: ObservableObject {
         statistics = LocalStorageService.shared.loadStatistics(key: Keys.statistics.rawValue) ?? []
     }
     
-    func updateStatistics(newStatistic: StatisticModel) {
-//        statistics.append(newStatistic)
-        LocalStorageService.shared.saveStatistics(statistics, key: Keys.statistics.rawValue)
+    func updateStatistics() {
+        DispatchQueue.main.async { [weak self] in
+            guard let self else { return }
+            let newStat = self.getRoundStatistic
+            self.statistics.append(newStat)
+            LocalStorageService.shared.saveStatistics(self.statistics, key: Keys.statistics.rawValue)
+        }
     }
     
     func clearStatistics() {
