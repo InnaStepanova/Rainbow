@@ -17,15 +17,13 @@ class GameEngineViewModel: ObservableObject {
     @Published var tagViewXPosition: CGFloat = CGFloat.random(in: -100...100)       // Рандомная позиция X
     @Published var tagViewYPosition: CGFloat = CGFloat.random(in: -100...100)       // Рандомная позиция Y
     @Published var changeViewTimerInterval: TimeInterval = 5.0                      // Ускорение игры по нажатию на кнопку
-    @Published var roundDuration: TimeInterval = 300                                // Время раунда
+    @Published var roundDuration: TimeInterval = 5                                  // Время раунда
     @Published var speedButtonText: String = "x2"
     @Published var shovAlert: Bool = false
+    @Published var speedOfChangingWords: Double = 5.0
+    @Published var backgroundForText: Bool = true
     // MARK: list of statistical models, with game results.
     @Published var statistics: [StatisticModel] = []
-
-    @AppStorage("minutesSlider")  var gameDuration: Double = 2.0
-    @AppStorage("speedOfChangingWords")  var speedOfChangingWords: Double = 5.0
-    @AppStorage("backgroundForText")  var backgroundForText: Bool = true
 
     let applicationBackground: Color = Color.mainBackground
     let colorsForTagBackground: [CustomColors] = CustomColors.allCases
@@ -51,7 +49,7 @@ class GameEngineViewModel: ObservableObject {
     var getRoundStatistic: StatisticModel {
         let number = statistics.count + 1
         let speed = Int(speedOfChangingWords)
-        let time = Int(gameDuration)
+        let time = Int(roundDuration)
         return StatisticModel(
             number: number,
             speed: speed,
@@ -61,19 +59,17 @@ class GameEngineViewModel: ObservableObject {
             qtyRightAnswers: 0
         )
     }
-
-
+    
     func initial() {
         checkSettings()
         labelText = textsForLabel.randomElement()?.rawValue ?? ""
         tagViewBackgroundColor = isNeedShowTagBackground() ? randomColorGenerator(colors: colorsForTagBackground) : .clear
         tagViewTextColor = isNeedChangeTextColor() ? randomColorGenerator(colors: colorsForTagBackground) : .white
-        roundDuration = gameDuration * 60
+        roundDuration = roundDuration * 60
         sliderValueChanged?(roundDuration)
         changeViewTimerInterval = speedOfChangingWords
         sliderValueChanged2?(speedOfChangingWords)
         speedButtonText = "x\(speedButtonCount)"
-        //roundDuration = model?.gameDuration ?? 300
     }
 
     func continueCurrentGame() {
@@ -94,7 +90,6 @@ class GameEngineViewModel: ObservableObject {
         if model == nil {
             LocalStorageService.shared.saveSettings(settings: SettingsModel.init(), name: Keys.settings.rawValue)
             model = LocalStorageService.shared.loadSettings(settingsName: Keys.settings.rawValue) ?? SettingsModel()
-
         }
     }
 
@@ -102,19 +97,16 @@ class GameEngineViewModel: ObservableObject {
         let currentGame = CurrentGameModel(
             speed: model?.speedOfChangingWords ?? 1.0,
             boost: 1.0,
-            longGameTime: gameDuration,
+            longGameTime: roundDuration,
             currentGameTime: roundDuration,
             isBackgroundForView: model?.isBackgroundForView ?? false)
-
-        print("CURRENT GAME: \(currentGame)")
-
         LocalStorageService.shared.saveCurrentGame(currentGame, key: Keys.currentGame.rawValue)
     }
 
     func startGameEngineTimer() {
-        if let timer = timer {
-            timer.cancel()
-        }
+//        if let timer = timer {
+//            timer.cancel()
+//        }
         timer = DispatchSource.makeTimerSource()
         timer?.schedule(deadline: .now() + changeViewTimerInterval, repeating: changeViewTimerInterval)
         timer?.setEventHandler {
@@ -137,20 +129,17 @@ class GameEngineViewModel: ObservableObject {
             roundDuration -= 1.0
             if roundDuration <= 0 {
                 raundTimer?.invalidate()
-
                 sliderValueChanged?(changeViewTimerInterval)
                 sliderValueChanged2?(speedOfChangingWords)
-
-
                 shovAlert.toggle()
-
             }
         }
     }
 
     func pauseTimer() {
         timerToggle.toggle()
-        timerToggle ? timer?.suspend() : timer?.resume()
+        timerToggle ? timer?.cancel() : startGameEngineTimer()//timer?.resume()
+        print("DEBUGGG: \(timerToggle)")
         isRaundTimerPaused = timerToggle
     }
 
@@ -170,7 +159,7 @@ class GameEngineViewModel: ObservableObject {
 
     private func isNeedChangeTextColor()-> Bool {
         guard let model else { return false }
-        return model.isChangeTextColor ? true : false
+        return model.isBackgroundForView ? false : true
     }
 
     // MARK: - Logic for loading statistics from UserDefaults
@@ -195,6 +184,8 @@ class GameEngineViewModel: ObservableObject {
     // MARK: - End game
     func endGame(isAlert: Bool) {
         speedButtonCount = 2
+        roundDuration = 5
+        isRaundTimerPaused = false
         stopTimer()
         if !isAlert {
             saveCurrentGame()
@@ -204,7 +195,7 @@ class GameEngineViewModel: ObservableObject {
     // MARK: - User actions
     func speedButtonTapped() {
         speedButtonCount == 1 ? changeTimerInterval(isSlowingDown: true) :
-                changeTimerInterval(isSlowingDown: false)
+        changeTimerInterval(isSlowingDown: false)
         speedButtonCount = ((speedButtonCount % 5) + 1)
         speedButtonText = "x\(speedButtonCount)"
         startGameEngineTimer()
