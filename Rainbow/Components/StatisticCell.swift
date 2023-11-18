@@ -21,11 +21,11 @@ struct StatisticCell: View {
             }
             .padding(EdgeInsets(top: 0, leading: 0, bottom: 8, trailing: 0))
             HStack {
-                Text("время \(String(format: "%.1f", statistics.time))")
+                Text("время \(statistics.time) мин.")
                 Spacer()
-                Text("угадано \(statistics.qtyRightAnswers)/\(statistics.qtyQuestions)")
-                    .fontWeight(.black)
-                    .foregroundStyle(Color.customLightGreen)
+//                Text("угадано \(statistics.qtyRightAnswers)/\(statistics.qtyQuestions)")
+//                    .fontWeight(.black)
+//                    .foregroundStyle(Color.customLightGreen)
             }
         }
         .font(.system(size: 20))
@@ -41,10 +41,10 @@ struct StatisticCell: View {
     StatisticCell(statistics: 
                     StatisticModel(
                         number: 1,
-                        speed: 1,
-                        time: 1.0,
-                        qtyQuestions: 5,
-                        qtyRightAnswers: 1
+                        speed: 2,
+                        time: 1,
+                        qtyQuestions: 0,
+                        qtyRightAnswers: 0
                     )
     )
 }

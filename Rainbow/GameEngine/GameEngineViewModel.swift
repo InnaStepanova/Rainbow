@@ -49,20 +49,18 @@ class GameEngineViewModel: ObservableObject {
     var sliderValueChanged2: ((TimeInterval) -> Void)?
 
     // генерим и получаем статистические данные раунда игры
-    // изменить формат свойств скорости времени и кол-ва игр
     var getRoundStatistic: StatisticModel {
         let number = statistics.count + 1
-        let speed = speedOfChangingWords
-        let time = gameDuration
-        let numbersOfQuetions = Int(time / speed)
-        let numbersOfRightAnswers = numbersOfQuetions
+        let speed = Int(speedOfChangingWords)
+        let time = Int(gameDuration)
         
         return StatisticModel(
             number: number, 
             speed: speed,
             time: time,
-            qtyQuestions: numbersOfQuetions,
-            qtyRightAnswers: numbersOfRightAnswers
+            // убрать, если не реализуем функционал
+            qtyQuestions: 0,
+            qtyRightAnswers: 0
         )
     }
 
