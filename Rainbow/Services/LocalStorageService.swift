@@ -38,6 +38,7 @@ final class LocalStorageService {
     
     func clearStatistics() {
         UserDefaults.standard.removeObject(forKey: Keys.statistics.rawValue)
+        UserDefaults.standard.synchronize()
     }
     
     // MARK: methods for saving / loading / deleting game CURRENTGAME
@@ -56,6 +57,7 @@ final class LocalStorageService {
         do {
             let data = try JSONEncoder().encode(object)
             UserDefaults.standard.set(data, forKey: key)
+            UserDefaults.standard.synchronize()
         } catch {
             print("\(T.Type.self) saving failed")
         }

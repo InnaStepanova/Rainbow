@@ -21,10 +21,10 @@ struct SettingsView: View {
                             Text("Время игры мин ")
                                 .lineLimit(1)
                                 .frame(width: 133)
-                            Slider(value: $model.gameDuration, in: 1...10, step: 1.0)
+                            Slider(value: $model.roundDuration, in: 1...10, step: 1.0)
                                 .frame(width: 111, height: 31)
                                 .accentColor(Color.orange)
-                            Text("\(Int(model.gameDuration))")
+                            Text("\(Int(model.roundDuration))")
                                 .frame(width: 33)
                         }
                         .modifier(CustomStyle())
@@ -52,7 +52,7 @@ struct SettingsView: View {
                     .navigationBarItems(leading: CustomBackButton())
         }
         .onDisappear {
-            LocalStorageService.shared.saveSettings(settings: SettingsModel(gameDuration: model.gameDuration, speedOfChangingWords: model.speedOfChangingWords, isBackgroundForView: model.backgroundForText, isChangeTextColor: false), name: Keys.settings.rawValue)
+            LocalStorageService.shared.saveSettings(settings: SettingsModel(gameDuration: model.roundDuration, speedOfChangingWords: model.speedOfChangingWords, isBackgroundForView: model.backgroundForText), name: Keys.settings.rawValue)
         }
     }
 }
