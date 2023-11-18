@@ -7,9 +7,16 @@
 
 import SwiftUI
 
+enum StatusGame {
+    case newGame
+    case currentGame
+}
+
 struct TagUIView: View {
     @EnvironmentObject var model: GameEngineViewModel
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    
+    let statusGame: StatusGame
 
     var body: some View {
         ZStack {
@@ -26,13 +33,20 @@ struct TagUIView: View {
                                 .shadow(radius: 10, x: 0, y: 5)
                 .offset(x: model.tagViewXPosition, y: model.tagViewYPosition)
                 .onAppear {
-                    model.screenBounds = UIScreen.main.bounds
-                    model.initial()
-                    model.startGameDurationTimer()
-                    model.startGameEngineTimer()
+                    if statusGame == .newGame {
+                        model.screenBounds = UIScreen.main.bounds
+                        model.initial()
+                        model.startGameDurationTimer()
+                        model.startGameEngineTimer()
+                    } else if statusGame == .currentGame {
+                        model.continueCurrentGame()
+                        model.startGameDurationTimer()
+                        model.startGameEngineTimer()
+                    }
                 }
                 .onDisappear {
                     model.stopTimer()
+                    model.saveCurrentGame()
                 }
             Button(action: {
                 model.changeTimerInterval()
@@ -77,6 +91,6 @@ struct TagUIView: View {
 }
 
 #Preview {
-    TagUIView()
+    TagUIView(statusGame: .newGame)
         .environmentObject(GameEngineViewModel())
 }

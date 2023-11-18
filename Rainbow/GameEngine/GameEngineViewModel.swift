@@ -78,6 +78,33 @@ class GameEngineViewModel: ObservableObject {
         //roundDuration = model?.gameDuration ?? 300
     }
 
+    func continueCurrentGame() {
+        if let currentGame = LocalStorageService.shared.loadCurrentGame(key: Keys.currentGame.rawValue) {
+            labelText = textsForLabel.randomElement()?.rawValue ?? ""
+            tagViewBackgroundColor = isNeedShowTagBackground() ? randomColorGenerator(colors: colorsForTagBackground) : .clear
+            tagViewTextColor = isNeedChangeTextColor() ? randomColorGenerator(colors: colorsForTagBackground) : .white
+            roundDuration = currentGame.currentGameTime
+            sliderValueChanged?(currentGame.currentGameTime)
+            changeViewTimerInterval = currentGame.speed
+            sliderValueChanged2?(currentGame.speed)
+        } else {
+            initial()
+        }
+    }
+    
+    func saveCurrentGame() {
+        let currentGame = CurrentGameModel(
+            speed: model?.speedOfChangingWords ?? 1.0,
+            boost: 1.0,
+            longGameTime: gameDuration,
+            currentGameTime: roundDuration,
+            isBackgroundForView: model?.isBackgroundForView ?? false)
+        
+        print("CURRENT GAME: \(currentGame)")
+        
+        LocalStorageService.shared.saveCurrentGame(currentGame, key: Keys.currentGame.rawValue)
+    }
+    
     func startGameEngineTimer() {
         timer = DispatchSource.makeTimerSource()
         timer?.schedule(deadline: .now() + changeViewTimerInterval, repeating: changeViewTimerInterval)

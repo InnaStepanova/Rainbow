@@ -10,6 +10,7 @@ import Foundation
 enum Keys: String {
     case settings
     case statistics
+    case currentGame
 }
 
 final class LocalStorageService {
@@ -38,6 +39,16 @@ final class LocalStorageService {
     func clearStatistics() {
         UserDefaults.standard.removeObject(forKey: Keys.statistics.rawValue)
     }
+    
+    // MARK: methods for saving / loading / deleting game CURRENTGAME
+    func saveCurrentGame(_ currentGame: CurrentGameModel, key: Keys.RawValue) {
+        save(currentGame, key: key)
+    }
+    
+    func loadCurrentGame(key: Keys.RawValue) -> CurrentGameModel? {
+        load(key: key)
+    }
+
     
     // MARK: - private save / load methods
     
