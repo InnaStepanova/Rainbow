@@ -9,8 +9,9 @@ import Foundation
 
 struct StatisticModel: Codable {
     let number: Int
-    let speed: Double
-    let time: Double
+    let speed: Int
+    let time: Int
+    // убрать, если не реализуем функционал
     let qtyQuestions: Int
     let qtyRightAnswers: Int
 }
