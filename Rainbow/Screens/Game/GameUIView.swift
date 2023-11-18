@@ -59,10 +59,10 @@ struct TagUIView: View {
 
             .navigationTitle("\(model.formattedGameTime)")
             .navigationBarBackButtonHidden(true)
-            .navigationBarItems(leading: CustomBackButton())
             .navigationBarItems(trailing: CustomPauseButton(action: {
                 model.pauseTimer()
             }))
+            .navigationBarItems(leading: CustomBackButton())
             .alert(isPresented: $model.shovAlert) {
                 model.endGame(isAlert: true)
                 return Alert(

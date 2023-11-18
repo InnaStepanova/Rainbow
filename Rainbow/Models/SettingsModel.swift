@@ -8,8 +8,8 @@
 import Foundation
 
 struct SettingsModel: Codable {
-    let gameDuration: Double
-    let speedOfChangingWords: Double
-    let isBackgroundForView: Bool
-    let isChangeTextColor: Bool
+    var gameDuration: Double = 2.0
+   var speedOfChangingWords: Double = 5.0
+   var isBackgroundForView: Bool = true
+   var isChangeTextColor: Bool = false
 }

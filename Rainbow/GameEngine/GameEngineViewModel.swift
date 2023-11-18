@@ -9,7 +9,7 @@ import SwiftUI
 
 class GameEngineViewModel: ObservableObject {
     // MARK: - Model from settings
-    let model = LocalStorageService.shared.loadSettings(settingsName: Keys.settings.rawValue)
+    var model = LocalStorageService.shared.loadSettings(settingsName: Keys.settings.rawValue)
 
     @Published var tagViewBackgroundColor: Color?                                   // Рандомный цвет вью
     @Published var labelText: String = ""                                           // Текст для лейбла
@@ -25,7 +25,7 @@ class GameEngineViewModel: ObservableObject {
 
     @AppStorage("minutesSlider")  var gameDuration: Double = 2.0
     @AppStorage("speedOfChangingWords")  var speedOfChangingWords: Double = 5.0
-    @AppStorage("backgroundForText")  var backgroundForText: Bool = false
+    @AppStorage("backgroundForText")  var backgroundForText: Bool = true
 
     let applicationBackground: Color = Color.mainBackground
     let colorsForTagBackground: [CustomColors] = CustomColors.allCases
@@ -64,6 +64,7 @@ class GameEngineViewModel: ObservableObject {
 
 
     func initial() {
+        checkSettings()
         labelText = textsForLabel.randomElement()?.rawValue ?? ""
         tagViewBackgroundColor = isNeedShowTagBackground() ? randomColorGenerator(colors: colorsForTagBackground) : .clear
         tagViewTextColor = isNeedChangeTextColor() ? randomColorGenerator(colors: colorsForTagBackground) : .white
@@ -86,6 +87,14 @@ class GameEngineViewModel: ObservableObject {
             sliderValueChanged2?(currentGame.speed)
         } else {
             initial()
+        }
+    }
+
+    private func checkSettings() {
+        if model == nil {
+            LocalStorageService.shared.saveSettings(settings: SettingsModel.init(), name: Keys.settings.rawValue)
+            model = LocalStorageService.shared.loadSettings(settingsName: Keys.settings.rawValue) ?? SettingsModel()
+
         }
     }
 
@@ -185,6 +194,7 @@ class GameEngineViewModel: ObservableObject {
 
     // MARK: - End game
     func endGame(isAlert: Bool) {
+        speedButtonCount = 2
         stopTimer()
         if !isAlert {
             saveCurrentGame()
