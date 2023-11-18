@@ -24,6 +24,7 @@ class GameEngineViewModel: ObservableObject {
     @AppStorage("backgroundForText")  var backgroundForText: Bool = false
 
     @Published var shovAlert: Bool = false
+    @Published var isShowTagBackground = false
     
 
     // MARK: list of statistical models, with game results.
@@ -68,6 +69,7 @@ class GameEngineViewModel: ObservableObject {
 
 
     func initial() {
+        print("Model initial \(String(describing: model))")
         labelText = textsForLabel.randomElement()?.rawValue ?? ""
         tagViewBackgroundColor = isNeedShowTagBackground() ? randomColorGenerator(colors: colorsForTagBackground) : .clear
         tagViewTextColor = isNeedChangeTextColor() ? randomColorGenerator(colors: colorsForTagBackground) : .white
@@ -81,7 +83,7 @@ class GameEngineViewModel: ObservableObject {
     func continueCurrentGame() {
         if let currentGame = LocalStorageService.shared.loadCurrentGame(key: Keys.currentGame.rawValue) {
             labelText = textsForLabel.randomElement()?.rawValue ?? ""
-            tagViewBackgroundColor = isNeedShowTagBackground() ? randomColorGenerator(colors: colorsForTagBackground) : .clear
+            tagViewBackgroundColor = currentGame.isBackgroundForView ? randomColorGenerator(colors: colorsForTagBackground) : .clear
             tagViewTextColor = isNeedChangeTextColor() ? randomColorGenerator(colors: colorsForTagBackground) : .white
             roundDuration = currentGame.currentGameTime
             sliderValueChanged?(currentGame.currentGameTime)

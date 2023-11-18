@@ -35,7 +35,7 @@ struct SettingsView: View {
                         HStack {
                             Text("Скорость смены заданий, сек ")
                                 .frame(width: 133)
-                            Slider(value: $model.speedOfChangingWords, in: 0...5)
+                            Slider(value: $model.speedOfChangingWords, in: 1...5)
                                 .frame(width: 111, height: 31)
                                 .accentColor(Color.orange)
                             Text("\(Int(model.speedOfChangingWords))")
